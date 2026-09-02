@@ -1,1 +1,1 @@
-# git-exercise
+# Trying to work with git and GitHub
