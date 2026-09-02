@@ -58,7 +58,28 @@ def explore_dicom_metadata(file_path):
 # Call the function
 explore_dicom_metadata("/Users/sima/Downloads/MIE2003/git-exercise/Dataset_Skills_01/CT/1.3.12.2.1107.5.1.4.105055.30000018070216565044500079806/1.3.12.2.1107.5.1.4.105055.30000018070216565044500079807.dcm")
 #%%
+# Print out specific DICOM tags of interest
+def print_specific_dicom_tags(file_path):
+    dataset = pydicom.dcmread(file_path)
+    
+    # Define the tags of interest
+    tags_of_interest = [
+        (0x0008, 0x0060),  # Modality
+        (0x0020, 0x0010),  # Study ID
+        (0x0008, 0x103E),  # Series Description
+        (0x0008, 0x0008),  # Image Type
+        (0x0020, 0x0032),  # Image Position (Patient)
+        (0x0020, 0x0037),  # Image Orientation (Patient)
+        (0x0028, 0x0030)   # Pixel Spacing
+    ]
+    
+    print("Specific DICOM Tags:")
+    for tag in tags_of_interest:
+        if tag in dataset:
+            print(f"{tag} : {dataset[tag].name} = {dataset[tag].value}")
+        else:
+            print(f"{tag} : Not found in the dataset.")
 
-
-
-
+# Call the function
+print_specific_dicom_tags("/Users/sima/Downloads/MIE2003/git-exercise/Dataset_Skills_01/CT/1.3.12.2.1107.5.1.4.105055.30000018070216565044500079806/1.3.12.2.1107.5.1.4.105055.30000018070216565044500079807.dcm")
+# %%
